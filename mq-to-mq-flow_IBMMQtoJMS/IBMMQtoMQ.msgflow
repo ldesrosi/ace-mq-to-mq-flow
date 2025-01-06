@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmCompute.msgnode="ComIbmCompute.msgnode" xmlns:ComIbmMQInput.msgnode="ComIbmMQInput.msgnode" xmlns:ComIbmMQOutput.msgnode="ComIbmMQOutput.msgnode" xmlns:ComIbmMSLMapping.msgnode="ComIbmMSLMapping.msgnode" xmlns:ComIbmTrace.msgnode="ComIbmTrace.msgnode" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="IBMMQtoMQ.msgflow" nsPrefix="IBMMQtoMQ.msgflow">
+  <eClassifiers xmi:type="eflow:FCMComposite" name="FCMComposite_1" nodeLayoutStyle="RECTANGLE">
+    <eSuperTypes href="http://www.ibm.com/wbi/2005/eflow#//FCMBlock"/>
+    <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="Property.inputQueueName" name="inputQueueName" lowerBound="1" defaultValueLiteral="QMGR01.Q.DEMO.IN">
+      <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="Property.inputConnection" name="inputConnection" lowerBound="1" eType="//%" defaultValueLiteral="CCDT"/>
+    <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="Property.outputQueueName" name="outputQueueName" defaultValueLiteral="QMGR01.Q.DEMO.OUT">
+      <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="Property.outputConnection" name="outputConnection" lowerBound="1" eType="//%.1" defaultValueLiteral="CCDT"/>
+    <translation xmi:type="utility:TranslatableString" key="IBMMQtoMQ" bundleName="IBMMQtoMQ" pluginId="mq-to-mq-flow_IBMMQtoMQ"/>
+    <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/mq-to-mq-flow_IBMMQtoMQ/icons/full/obj16/IBMMQtoMQ.gif"/>
+    <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/mq-to-mq-flow_IBMMQtoMQ/icons/full/obj30/IBMMQtoMQ.gif"/>
+    <composition>
+      <nodes xmi:type="ComIbmMSLMapping.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="657,97" mappingExpression="msl://{default}#IBMMQtoMQ_Mapping">
+        <translation xmi:type="utility:ConstantString" string="Mapping"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="240,250" computeExpression="esql://routine/#IBMMQtoJMS_HandleException.Main">
+        <translation xmi:type="utility:ConstantString" string="HandleException"/>
+      </nodes>
+      <nodes xmi:type="ComIbmMQInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="60,164" queueName="QMGR01.Q.DEMO.IN" connection="CCDT" destinationQueueManagerName="IBMDEMO01" messageDomainProperty="JSON">
+        <translation xmi:type="utility:ConstantString" string="MQ Input"/>
+      </nodes>
+      <nodes xmi:type="ComIbmTrace.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="857,248" destination="file" filePath="/tmp/TraceIBMMQtoJMS.txt" pattern="====================&#xD;&#xA;${LocalEnvironment}&#xD;&#xA;====================&#xD;&#xA;${ExceptionList}">
+        <translation xmi:type="utility:ConstantString" string="Trace"/>
+      </nodes>
+      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="451,93" queueName="QMGR01.Q.DEMO.OUT" connection="CCDT" destinationQueueManagerName="IBMDEMO01">
+        <translation xmi:type="utility:ConstantString" string="MQ Output"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_6" location="241,92" computeExpression="esql://routine/#IBMMQtoJMS_Compute.Main">
+        <translation xmi:type="utility:ConstantString" string="Compute"/>
+      </nodes>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_5" sourceNode="FCMComposite_1_3" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_2" targetNode="FCMComposite_1_5" sourceNode="FCMComposite_1_2" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_3" targetNode="FCMComposite_1_3" sourceNode="FCMComposite_1_4" sourceTerminalName="OutTerminal.catch" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_5" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_6" targetNode="FCMComposite_1_6" sourceNode="FCMComposite_1_4" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_7" targetNode="FCMComposite_1_1" sourceNode="FCMComposite_1_6" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+    </composition>
+    <propertyOrganizer>
+      <propertyDescriptor groupName="Group.Input" propertyEditor="com.ibm.etools.mft.ibmnodes.editors.mq.MQQueueNameEditor" configurable="true" describedAttribute="Property.inputQueueName">
+        <propertyName xmi:type="utility:TranslatableString" key="Property.inputQueueName" bundleName="IBMMQtoMQ" pluginId="mq-to-mq-flow_IBMMQtoMQ"/>
+        <propertyDescriptor groupName="Group.Input" propertyEditor="com.ibm.etools.mft.ibmnodes.editors.mq.BindingTypeEditor" configurable="true" describedAttribute="Property.inputConnection">
+          <propertyName xmi:type="utility:TranslatableString" key="Property.inputConnection" bundleName="IBMMQtoMQ" pluginId="mq-to-mq-flow_IBMMQtoMQ"/>
+          <propertyDescriptor groupName="Group.Ouput" propertyEditor="com.ibm.etools.mft.ibmnodes.editors.mq.MQQueueNameEditor" configurable="true" describedAttribute="Property.outputQueueName">
+            <propertyName xmi:type="utility:TranslatableString" key="Property.outputQueueName" bundleName="IBMMQtoMQ" pluginId="mq-to-mq-flow_IBMMQtoMQ"/>
+            <propertyDescriptor groupName="Group.Ouput" propertyEditor="com.ibm.etools.mft.ibmnodes.editors.mq.BindingTypeEditor" configurable="true" describedAttribute="Property.outputConnection">
+              <propertyName xmi:type="utility:TranslatableString" key="Property.outputConnection" bundleName="IBMMQtoMQ" pluginId="mq-to-mq-flow_IBMMQtoMQ"/>
+            </propertyDescriptor>
+          </propertyDescriptor>
+        </propertyDescriptor>
+      </propertyDescriptor>
+    </propertyOrganizer>
+    <attributeLinks promotedAttribute="Property.inputQueueName" overriddenNodes="FCMComposite_1_4">
+      <overriddenAttribute href="ComIbmMQInput.msgnode#Property.queueName"/>
+    </attributeLinks>
+    <attributeLinks promotedAttribute="Property.inputConnection" overriddenNodes="FCMComposite_1_4">
+      <overriddenAttribute href="ComIbmMQInput.msgnode#Property.connection"/>
+    </attributeLinks>
+    <attributeLinks promotedAttribute="Property.outputQueueName" overriddenNodes="FCMComposite_1_1">
+      <overriddenAttribute href="ComIbmMQOutput.msgnode#Property.queueName"/>
+    </attributeLinks>
+    <attributeLinks promotedAttribute="Property.outputConnection" overriddenNodes="FCMComposite_1_1">
+      <overriddenAttribute href="ComIbmMQOutput.msgnode#Property.connection"/>
+    </attributeLinks>
+    <stickyBoard/>
+  </eClassifiers>
+  <eClassifiers xmi:type="ecore:EEnum">
+    <eLiterals xmi:id="inputConnection.SERVER" name="SERVER"/>
+    <eLiterals xmi:id="inputConnection.CLIENT" name="CLIENT" value="1"/>
+    <eLiterals xmi:id="inputConnection.CCDT" name="CCDT" value="2"/>
+  </eClassifiers>
+  <eClassifiers xmi:type="ecore:EEnum">
+    <eLiterals xmi:id="outputConnection.SERVER" name="SERVER"/>
+    <eLiterals xmi:id="outputConnection.CLIENT" name="CLIENT" value="1"/>
+    <eLiterals xmi:id="outputConnection.CCDT" name="CCDT" value="2"/>
+  </eClassifiers>
+</ecore:EPackage>
